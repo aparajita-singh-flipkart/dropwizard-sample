@@ -6,6 +6,7 @@ import com.flipkart.dropwizardsamplegradle.resource.SampleResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class SampleApp extends Application<SampleConfiguration> {
 
@@ -22,6 +23,9 @@ public class SampleApp extends Application<SampleConfiguration> {
 
     @Override
     public void initialize(Bootstrap<SampleConfiguration> bootstrap) {
-
+        bootstrap.addBundle(GuiceBundle.builder()
+                        .useHK2ForJerseyExtensions()
+                .enableAutoConfig(getClass().getPackage().getName())
+                .build());
     }
 }
